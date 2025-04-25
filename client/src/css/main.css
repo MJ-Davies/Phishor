@@ -1,0 +1,31 @@
+@import url('./index.css');
+
+.cover_div {
+    display: flex;
+    align-items:center;
+    height: 100vh;
+    overflow: hidden;
+    
+}
+
+#cover_section {
+    background-image: url('../../cherry_blossom_bg.png');
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 60%;
+}
+
+.cover_text_div {
+    width: 50%;
+}
+
+.cover_header {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 20%;
+}
+
+.cover_header span {
+    color: var(--color-accentColorGreen);
+}
