@@ -83,26 +83,95 @@ nav a {
   font-size:inherit;
   font-weight: inherit;
   font-family: inherit;
-  /* transition: all 0.3s ease; */
+}
+
+footer {
+  background-color: var(--color-accentColorPeach);
+  padding: 30px 0px;
+}
+
+.footer_div {
+  color: var(--color-textColorDark);
+  font-size: 1.7rem;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.github_link svg {
+  width: 100px; /* Adjust size */
+  height: auto;
+  cursor: pointer;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-size: 2.5rem;
 }
 
+section p, section li {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+button {
+  font-size: 1.7rem;
+  line-height: 1.5;
+}
+
+li {
+  margin-bottom: 25px;
+}
+
 .dark_section {
   background-color: var(--color-primaryBgColorDark);
 }
 
-.dark_section p, .dark_section h1, .dark_section h2, .dark_section h3, .dark_section h4, .dark_section h5, .dark_section h6 {
+.dark_section p, .dark_section h1, .dark_section h2, .dark_section h3, .dark_section h4, .dark_section h5, .dark_section h6, .dark_section li, .light_section button {
   color: var(--color-textColorLight);
 } 
+
+.dark_section button {
+  background-color: var(--color-accentColorYellow);
+  padding: 25px;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.dark_section button:hover {
+  background-color: var(--color-accentColorGreen);
+  color: var(--color-textColorDark);
+}
+
+.dark_section span {
+  color: var(--color-accentColorPeach);
+  font-weight: bold;
+}
 
 .light_section {
   background-color: var(--color-primaryBgColor);
 }
 
-.light_section p, .light_section h1, .light_section h2, .light_section h3, .light_section h4, .light_section h5, .light_section h6 {
+.light_section p, .light_section h1, .light_section h2, .light_section h3, .light_section h4, .light_section h5, .light_section h6, .light_section li, .dark_section button {
+  color: var(--color-textColorDark);
+}
+
+.light_section button {
+  background-color: var(--color-accentColorDarkGreen);
+  padding: 25px;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.light_section button:hover {
+  background-color: var(--color-accentColorGreen);
   color: var(--color-textColorDark);
 }
 

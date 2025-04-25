@@ -1,10 +1,16 @@
 import Nav from '../components/Nav.tsx'
+import Footer from '../components/Footer.tsx'
 import { useEffect, useState } from "react";
-import { TypeAnimation } from 'react-type-animation';
 import "../css/main.css";
+import { useNavigate } from "react-router-dom";
 
 function MainPage() {
+  const navigate = useNavigate();
   const [navBgColor, setNavBgColor] = useState("var(--color-primaryBgColorLight)");
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
 
   // Set the background color of the nav bar to the background color of the first section (cover_section)
   useEffect (() => {
@@ -39,10 +45,20 @@ function MainPage() {
       </section>
       <section id="about_section" className="dark_section">
         <div className="about_div">
-          <h1 className="header_underline">I am a header</h1>
-          <p className="">hi</p>
+        <h1 className="header_underline">Why <span>Phishor?</span></h1>
+          <p className="">Phishor is a tool that uses artificial intelligence to detect phishing attempts in your conversations. It is designed to be easy to use and accessible to everyone.</p>
+          <p className="">It's as simple as:</p>
+          <ol>
+            <li>Uploading your conversation</li>
+            <li>Get it analyzed by artificial intelligence</li>
+            <li>Let AI tell you the likelihood of getting phished</li>
+          </ol>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "50px 0" }}>
+            <button onClick={handleLoginClick}>Start Safe Now</button>
+          </div>
         </div>
       </section>
+      <Footer/>
     </div>
   )
 }
