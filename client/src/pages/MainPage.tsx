@@ -43,6 +43,7 @@ function MainPage() {
           </div>
         </div>
       </section>
+      {/* About section */}
       <section id="about_section" className="dark_section">
         <div className="about_div">
         <h1 className="header_underline">Why <span>Phishor?</span></h1>
@@ -54,7 +55,7 @@ function MainPage() {
             <li>Let AI tell you the likelihood of getting phished</li>
           </ol>
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "50px 0" }}>
-            <button onClick={handleLoginClick}>Start Safe Now</button>
+            <button onClick={handleLoginClick}>Start Now</button>
           </div>
         </div>
       </section>

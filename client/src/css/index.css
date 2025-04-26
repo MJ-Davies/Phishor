@@ -7,6 +7,8 @@
   --color-accentColorPeach: #FFC5AF;
   --color-accentColorGreen: #A8CD88;
   --color-accentColorDarkGreen: #264621;
+  --color-link: #2D74FF;
+  --color-activeLink: #6f64d2;
 }
 /* TEMPORARY CLASSES */
 .temp {
@@ -18,6 +20,7 @@
 }
 /* END OF TEMPORARY CLASSES */
 
+/* Universal styling */
 body {
   margin: 0;
   background-color: var(--color-primaryBgColorLight);
@@ -36,13 +39,21 @@ section > div, nav > ul, footer > div, nav > ul {
   max-width: 1500px;
 }
 
+a {
+  color: var(--color-link);
+}
+
+a:visited {
+  color: var(--color-activeLink);
+}
+
+/* Nav styling */
 .nav_wrapper {
   height: 100px;
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 99;
-  /* background-color: red; */
 }
 
 .nav_wrapper > span {
@@ -85,8 +96,13 @@ nav a {
   font-family: inherit;
 }
 
+nav a:visited {
+  color: var(--color-textColorDark);
+}
+
+/* Footer styling */
 footer {
-  background-color: var(--color-accentColorPeach);
+  background-color: var(--color-accentColorGreen);
   padding: 30px 0px;
 }
 
@@ -106,11 +122,12 @@ footer {
   cursor: pointer;
 }
 
+/* Section styling */
 h1, h2, h3, h4, h5, h6 {
   font-size: 2.5rem;
 }
 
-section p, section li {
+section p, section li, form input {
   font-size: 1.5rem;
   line-height: 1.5;
 }
@@ -118,6 +135,7 @@ section p, section li {
 button {
   font-size: 1.7rem;
   line-height: 1.5;
+  border-radius: 15px;
 }
 
 li {
@@ -136,14 +154,13 @@ li {
   background-color: var(--color-accentColorYellow);
   padding: 25px;
   border: none;
-  border-radius: 15px;
   font-weight: bold;
   transition: ease-in-out 0.3s;
   cursor: pointer;
 }
 
 .dark_section button:hover {
-  background-color: var(--color-accentColorGreen);
+  background-color: var(--color-accentColorPeach);
   color: var(--color-textColorDark);
 }
 
@@ -175,6 +192,7 @@ li {
   color: var(--color-textColorDark);
 }
 
+/* Additional element styling for headers */
 .header_underline {
   position: relative;
   display: inline-block; /* Ensures proper width calculation */
@@ -191,3 +209,60 @@ li {
   border-radius: 10px;
 }
 
+/* Additional element styling for forms */
+form {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+}
+
+form > * {
+  margin: 10px 0px;
+  width: 100%;
+}
+
+form input {
+  width: 90%;
+  border-radius: 15px;
+  border: 2px solid #767676
+}
+
+form input:focus {
+  outline: none;
+}
+
+.password_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* display: inline-block; */
+}
+
+.icon {
+  position: absolute;
+  margin: 0px;
+  width: auto;
+  right: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.hidden-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+.no_style {
+  all: unset !important;
+}

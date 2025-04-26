@@ -1,0 +1,37 @@
+@import url('./index.css');
+
+#login_section {
+    background-color: var(--color-primaryBgColorLight);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 300px;
+}
+
+.login_div {
+    width: 100%;
+    max-width: 80vw;
+    max-height: 80vh;
+    background-color: var(--color-accentColorDarkGreen);
+    padding: 30px 100px;
+    border-radius: 15px;
+}
+
+.login_div h1 {
+    width: 100%;
+    text-align: center;
+}
+
+#login_form {
+    display:flex;
+    flex-direction: column;
+}
+
+input[id="username"], input[id="password"] {
+    padding: 10px;
+}
+
+button[type="submit"] {
+    width: fit-content;
+}
