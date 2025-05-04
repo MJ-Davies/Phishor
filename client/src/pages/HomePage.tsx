@@ -3,7 +3,6 @@ import Footer from '../components/Footer.tsx'
 import MHistForm from '../components/MHistForm.tsx'
 import { useEffect, useState } from "react";
 import "../css/home.css";
-import { useNavigate } from "react-router-dom";
 
 function HomePage() {
     const [navBgColor, setNavBgColor] = useState("var(--color-primaryBgColorLight)");
