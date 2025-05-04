@@ -1,0 +1,31 @@
+@import url('./index.css');
+
+#intro_section {
+    padding-top: 70px;
+}
+
+.mhist_form {
+    background-color: var(--color-accentColorYellow);
+    border-radius: 15px;
+    padding: 30px 75px;
+}
+
+.mhist_form p, .mhist_form h1 {
+    color: var(--color-textColorDark);
+}
+
+.mhist_form button {
+    background-color: var(--color-accentColorGreen);
+}
+
+.mhist_form button:hover {
+    background-color: var(--color-accentColorDarkGreen);
+    color: var(--color-textColorLight);
+}
+
+.mhist_form li {
+    background-color: var(--color-accentColorGreen);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}

@@ -1,0 +1,38 @@
+@import url('./index.css');
+
+.color_grid_div {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.color_box {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* Offset-X, Offset-Y, Blur-Radius, Color */
+    transition: all 0.3s ease;
+    margin: 20px;
+}
+
+.color_box:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(55, 55, 55, 0.8); /* White glow effect */
+}
+
+.mhist_form > h1 {
+    color: var(--color-textColorDark);
+}
+
+.mhist_form ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

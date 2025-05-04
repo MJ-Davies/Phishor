@@ -34,6 +34,10 @@ section, nav, footer {
   justify-content: center;
 }
 
+section {
+  padding: 20px 75px;
+}
+
 section > div, nav > ul, footer > div, nav > ul {
   width: 100%;
   max-width: 1500px;
@@ -127,7 +131,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 2.5rem;
 }
 
-section p, section li, form input {
+section p, section li, form input, form select, form textarea {
   font-size: 1.5rem;
   line-height: 1.5;
 }
@@ -170,7 +174,7 @@ li {
 }
 
 .light_section {
-  background-color: var(--color-primaryBgColor);
+  background-color: var(--color-primaryBgColorLight);
 }
 
 .light_section p, .light_section h1, .light_section h2, .light_section h3, .light_section h4, .light_section h5, .light_section h6, .light_section li, .dark_section button {
@@ -220,15 +224,24 @@ form {
 form > * {
   margin: 10px 0px;
   width: 100%;
+  box-sizing: border-box;
 }
 
-form input {
-  width: 90%;
+form input, form select, form textarea {
+  width: 100%;
   border-radius: 15px;
-  border: 2px solid #767676
+  border: 2px solid #767676;
+  padding: 10px;
+  box-sizing: border-box;
+
 }
 
-form input:focus {
+form textarea {
+  resize: none;
+  min-height: 200px;
+}
+
+form input:focus, form select:focus, form textarea:focus {
   outline: none;
 }
 
@@ -244,7 +257,7 @@ form input:focus {
   position: absolute;
   margin: 0px;
   width: auto;
-  right: 75px;
+  right: 25px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
