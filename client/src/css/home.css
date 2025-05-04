@@ -23,9 +23,39 @@
     color: var(--color-textColorLight);
 }
 
+.mhist_form > h1 {
+    color: var(--color-textColorDark) !important;
+}
+
+.mhist_form ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 .mhist_form li {
     background-color: var(--color-accentColorGreen);
     padding: 10px;
     margin: 5px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mhist_form li > button {
+    padding: 10px;
+    font-weight: normal;
+    font-size: 1.5rem;
+}
+
+#mhist_entry_form > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mhist_entry_form button[type="submit"] {
+    color: red;
 }

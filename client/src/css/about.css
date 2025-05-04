@@ -25,14 +25,3 @@
     transform: scale(1.1);
     box-shadow: 0 0 20px rgba(55, 55, 55, 0.8); /* White glow effect */
 }
-
-.mhist_form > h1 {
-    color: var(--color-textColorDark);
-}
-
-.mhist_form ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
