@@ -1,5 +1,6 @@
 use actix_web::{web, get, HttpServer, App, Responder, HttpResponse};
 use actix_web::web::Path;
+use routes::configure_routes;
 
 // One endpoint with get method
 #[get("/home")]
@@ -24,15 +25,18 @@ mod utils;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
+    println!("Initializing the server...");
+
     HttpServer::new(|| {
         App::new()
+            .configure(configure_routes) // Attach your route configurations
             .service(home)
             .service(hello_user)
     })
     .bind(("127.0.0.1", 8000))?
     .run()
-    .await; // Await the server properly
+    .await?;
 
-    println!("Server running on port 8000"); // Correct `println!` syntax
-    Ok(()) // Ensure proper return type
+    println!("Server is running on port 8000");
+    Ok(())
 }

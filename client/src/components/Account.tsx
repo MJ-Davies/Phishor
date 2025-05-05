@@ -10,7 +10,7 @@ export async function login(username: string, password: string): Promise<boolean
         formData.append("username", username);
         formData.append("password", password);
 
-        const response = await fetch("http://localhost:8000/login", {
+        const response = await fetch("http://localhost:8000/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" }, // Form data type
             body: formData.toString(), // Convert form data to a URL-encoded string
@@ -54,7 +54,7 @@ export async function fetchProtectedData(): Promise<any> {
     }
 
     try {
-        const response = await fetch("http://localhost:8000/protected-route", {
+        const response = await fetch("http://localhost:8000/api/protected-route", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`

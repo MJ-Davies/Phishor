@@ -29,6 +29,8 @@ pub struct RegisterForm {
 pub async fn register(credentials: web::Form<RegisterForm>) -> impl Responder {
     let mut users = USERS.lock().unwrap();
 
+    println!("Registering user...");
+
     if users.contains_key(&credentials.username) {
         return HttpResponse::Conflict().body("Username already exists");
     }
