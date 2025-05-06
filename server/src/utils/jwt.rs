@@ -36,20 +36,3 @@ Returns: Claims
 pub fn verify_token(token: &str) -> Result<Claims, jsonwebtoken::errors::Error> {
     decode::<Claims>(token, &DecodingKey::from_secret(SECRET), &Validation::default()).map(|data| data.claims)
 }
-
-/** 
-Purpose: Checks that login is valid
-Params: str = a JWT (valid or invalid)
-Returns: response body
-*/
-pub async fn login(credentials: web::Form<(String, String)>) -> impl Responder {
-    let (username, password) = credentials.into_inner();
-
-    // TODO: Validate username and password against database (pseudo-code)
-    let token = generate_token(&username);
-    if username == "admin" && password == "password123" {
-        return HttpResponse::Ok().body(token);
-    }
-
-    HttpResponse::Unauthorized().body("Invalid credentials")
-}
