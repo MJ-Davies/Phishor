@@ -32,13 +32,15 @@ pub async fn register(credentials: web::Form<RegisterForm>) -> impl Responder {
     println!("Registering user...");
 
     if users.contains_key(&credentials.username) {
+        println!("Username already exists, register unsuccessful");
         return HttpResponse::Conflict().body("Username already exists");
     }
 
     // TODO: Store user securely (hash passwords in real implementation)
     users.insert(credentials.username.clone(), credentials.password.clone());
-
+    println!("Successfully created user, generating JSON Web Token...");
     let token = generate_token(&credentials.username);
+    println!("JSON Web Token successfully generated");
     HttpResponse::Created().body(token)
 }
 
@@ -47,16 +49,20 @@ Purpose: Checks that login is valid
 Params: str = a JWT (valid or invalid)
 Returns: response body
 */
-pub async fn login(credentials: web::Form<(String, String)>) -> impl Responder {
-    let (username, password) = credentials.into_inner();
+pub async fn login(credentials: web::Form<RegisterForm>) -> impl Responder {
     let users = USERS.lock().unwrap();
-
-    // Check if the username exists and the password matches
-    match users.get(&username) {
-        Some(stored_password) if stored_password == &password => {
-            let token = generate_token(&username);
-            return HttpResponse::Ok().body(token);
+    
+    println!("Checking if username exists");
+    match users.get(&credentials.username) {
+        Some(saved_password) if saved_password == &credentials.password => {
+            println!("Password matches username, generating JSON Web Token...");
+            let token = generate_token(&credentials.username);
+            println!("JSON Web Token was successfully generated");
+            HttpResponse::Ok().body(token)
         }
-        _ => HttpResponse::Unauthorized().body("Invalid credentials"),
+        _ => {
+            println!("Credentials are invalid");
+            HttpResponse::Unauthorized().body("Invalid username or password")
+        }
     }
 }

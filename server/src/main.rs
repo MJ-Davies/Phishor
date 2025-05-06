@@ -29,7 +29,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new()
-            .configure(configure_routes) // Attach your route configurations
+            .configure(configure_routes) // Attach route configurations
             .service(home)
             .service(hello_user)
     })
