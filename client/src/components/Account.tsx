@@ -1,39 +1,7 @@
 /**
- * Purpose: Logs in a user by sending form-encoded credentials to the server.
- * Params: username - The username of the user trying to log in.
- *         password - The password of the user trying to log in.
- * Returns: A Promise that resolves to the login success status.
- */
-export async function login(username: string, password: string): Promise<boolean> {
-    try {
-        const formData = new URLSearchParams();
-        formData.append("username", username);
-        formData.append("password", password);
-
-        const response = await fetch("http://localhost:8000/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" }, // Form data type
-            body: formData.toString(), // Convert form data to a URL-encoded string
-        });
-
-        if (!response.ok) {
-            console.error("Login failed");
-            return false;
-        }
-
-        const data: { token: string } = await response.json();
-        localStorage.setItem("jwt", data.token); // Store JWT
-
-        return true; // Login successful
-    } catch (error) {
-        console.error("Error during login:", error);
-        return false;
-    }
-}
-
-/**
  * Purpose: Fetches data from a protected API route that requires JWT authentication.
  *          The function retrieves the JWT from local storage and includes it in the Authorization header.
+ *          If the JWT is authorized, then protected data is fetched from the backend (this has no use right now since there is no data tied to an account yet)
  *
  * Params: None
  *

@@ -6,7 +6,6 @@ NOTES: JWT tokens here are meant to authenticate users after they have logged in
 use jsonwebtoken::{encode, decode, Header, Validation, EncodingKey, DecodingKey};
 use serde::{Serialize, Deserialize};
 use chrono::{Utc, Duration};
-use actix_web::{web, HttpResponse, Responder};
 
 const SECRET: &[u8] = b"A STATIC KEY"; // Can be made dynamic in a future development
 
@@ -34,5 +33,8 @@ Params: str = a JWT (valid or invalid)
 Returns: Claims
 */
 pub fn verify_token(token: &str) -> Result<Claims, jsonwebtoken::errors::Error> {
-    decode::<Claims>(token, &DecodingKey::from_secret(SECRET), &Validation::default()).map(|data| data.claims)
+    let mut validation = Validation::default();
+    validation.validate_exp = true; // Enforce expiration check
+
+    decode::<Claims>(token, &DecodingKey::from_secret(SECRET), &validation).map(|data| data.claims)
 }

@@ -27,28 +27,31 @@ function RegisterPage() {
   const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    // Create the form data
     const formData = new URLSearchParams();
     formData.append("username", username);
     formData.append("password", password);
 
     try {
-      const response = await fetch("http://localhost:8000/register", {
+      // Send the form data
+      const response = await fetch("http://localhost:8000/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formData.toString(),
       });
 
+      // Get the response back and store the jwt token locally in this session
       if (response.ok) {
         const token = await response.text();
         localStorage.setItem("jwt", token);
         setMessage("Registration successful!");
-        navigate("/"); // Redirect after successful registration
+        navigate("/home"); // Redirect to home after successful registration
       } else {
         const errorText = await response.text();
         setMessage(`Registration failed: ${errorText}`);
       }
     } catch (error) {
-      setMessage("Error connecting to the server.");
+      setMessage(`Error connecting to the server. ${error}`);
       console.error(error);
     }
   };
@@ -69,6 +72,7 @@ function RegisterPage() {
                 placeholder="Username" 
                 value={username} 
                 onChange={(e) => setUsername(e.target.value)}
+                autoComplete="username"
                 required 
               />
               <div className="password_container">
@@ -80,6 +84,7 @@ function RegisterPage() {
                   placeholder="Password" 
                   value={password} 
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
                   required 
                 />
                 <div id="toggle_password" className="icon">

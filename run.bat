@@ -7,3 +7,4 @@ cd client
 start npm run dev
 cd ../server
 start cargo run
+cd ..
