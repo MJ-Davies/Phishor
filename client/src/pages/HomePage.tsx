@@ -8,7 +8,9 @@ function HomePage() {
     const [navBgColor, setNavBgColor] = useState("var(--color-primaryBgColorLight)");
     const [feedback, setFeedback] = useState([]);
 
-    // Set the background color of the nav bar to the background color of the first section (cover_section)
+    // Purpose: Set the background color of the nav bar to the background color of the first section (cover_section)
+    // Parameters: None
+    // Returns: None
     useEffect(() => {
         const intro_section_element = document.getElementById("intro_section");
         if (intro_section_element) {

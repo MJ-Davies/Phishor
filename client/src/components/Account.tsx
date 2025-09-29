@@ -5,7 +5,7 @@
  *
  * Params: None
  *
- * Returns: A Promise resolving to the response body as a JSON object.
+ * Returns: A Promise resolving to the response body as a JSON object or null if no token is found
  *
  * Notes: Call this function:
  *        - On page load

@@ -1,11 +1,16 @@
+/**
+ * Purpose: Represents the message history form that users put for it to be analyzed by AI in the backend
+ */
 import React, { useState } from "react";
 
+// An enumerator that defines the parties involved in this message history form
 const enum User {
   Me = "Me",
   Them = "Them"
 }
 
 const MHistForm = () => {
+  // Default content for the user to see
   const [items, setItems] = useState([
     { user: User.Me, message: "Hello!" },
     { user: User.Them, message: "Hi there!" },
@@ -13,10 +18,18 @@ const MHistForm = () => {
     { user: User.Them, message: "I'm good, thanks!" }
   ]);
 
+  // Purpose: Handles start of the drag event for the message history form
+  // Parameters: e(React.DragEvent) - The event to handle (drag)
+  //             index(number) - The current index of this element being dragged
+  // Returns: None
   const handleDragStart = (e: React.DragEvent<HTMLLIElement>, index: number) => {
     e.dataTransfer.setData("text/plain", index.toString());
   };
 
+  // Purpose: Handles the end of a drag event for the message history form
+  // Parameters: e(React.DragEvent) - The event to handle (drag)
+  //             index(number) - The index where we dropped the element
+  // Returns: None
   const handleDrop = (e: React.DragEvent<HTMLLIElement>, index: number) => {
     e.preventDefault();
     const draggedIndex = Number(e.dataTransfer.getData("text/plain"));
@@ -30,10 +43,16 @@ const MHistForm = () => {
     setItems(newItems);
   };
 
+  // Purpose: Handles the delete of an elementin the message history form
+  // Parameters: index(number) - The index of the element to delete
+  // Returns: None
   const handleDelete = (index: number) => {
     setItems(items.filter((_, i) => i !== index));
   };
 
+  // Purpose: Adds an entry to the message history form
+  // Parameters: None
+  // Returns: None
   const handleAddEntry = () => {
     // Get user selection and message input
     const userSelect = (document.getElementById("user") as HTMLSelectElement).value as User;
@@ -48,8 +67,12 @@ const MHistForm = () => {
     (document.getElementById("message") as HTMLTextAreaElement).value = "";
   };
   
+  // Purpose: Function to send to backend server when code finishes
+  // Parameters: e(React.FormEvent)
+  // Returns: None
   const sendToBackend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // TODO implement Sending the items array to the backend server
     console.log("Sending to backend!")
   }
 

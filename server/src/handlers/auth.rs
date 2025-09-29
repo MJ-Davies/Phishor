@@ -15,6 +15,7 @@ lazy_static! {
     static ref USERS: Mutex<HashMap<String, String>> = Mutex::new(HashMap::new());
 }
 
+// Define form struct for a register form
 #[derive(Debug, Deserialize)]
 pub struct RegisterForm {
     username: String,
@@ -23,7 +24,7 @@ pub struct RegisterForm {
 
 /**
  * Purpose: Handles user registration.
- * Params: request = Contains username and password.
+ * Params: credentials(RegisterForm) - Registration credentials containing username and password
  * Returns: HTTP response with success or failure message.
  */
 pub async fn register(credentials: web::Form<RegisterForm>) -> impl Responder {
@@ -46,7 +47,7 @@ pub async fn register(credentials: web::Form<RegisterForm>) -> impl Responder {
 
 /** 
 Purpose: Checks that login is valid
-Params: str = a JWT (valid or invalid)
+Params: credentials(RegisterForm) - Login credentials containing username and password
 Returns: response body
 */
 pub async fn login(credentials: web::Form<RegisterForm>) -> impl Responder {

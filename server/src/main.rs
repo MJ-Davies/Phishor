@@ -8,11 +8,14 @@ mod handlers;
 mod middleware;
 mod utils;
 
+// Purpose: Initialize and run the backend server
+// Parameters: None
+// Returns: None
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     println!("Initializing the server...");
 
-    HttpServer::new(|| {
+    let server = HttpServer::new(|| {
         App::new()
             .wrap(
                 Cors::default()
@@ -22,10 +25,8 @@ async fn main() -> std::io::Result<()> {
             )
             .configure(configure_routes) // Attach route configurations
     })
-    .bind(("127.0.0.1", 8000))?
-    .run()
-    .await?;
-
+    .bind(("127.0.0.1", 8000))?;
     println!("Server is running on port 8000");
+    server.run().await;
     Ok(())
 }

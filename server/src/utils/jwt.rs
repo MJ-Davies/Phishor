@@ -9,6 +9,7 @@ use chrono::{Utc, Duration};
 
 const SECRET: &[u8] = b"A STATIC KEY"; // Can be made dynamic in a future development
 
+// Struct defining what a Claims is
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
     sub: String, // User ID
@@ -17,7 +18,7 @@ pub struct Claims {
 
 /** 
 Purpose: Generates a JSON Web Token (JWT) for the user
-Params: user_id = the User ID that is getting the JWT generated
+Params: user_id(address to string) - the User ID that is getting the JWT generated
 Returns: String
 */
 pub fn generate_token(user_id: &str) -> String {
@@ -29,7 +30,7 @@ pub fn generate_token(user_id: &str) -> String {
 
 /** 
 Purpose: Verifies the JWT to ensure it is valid
-Params: str = a JWT (valid or invalid)
+Params: token(address to string) - a JWT (valid or invalid)
 Returns: Claims
 */
 pub fn verify_token(token: &str) -> Result<Claims, jsonwebtoken::errors::Error> {

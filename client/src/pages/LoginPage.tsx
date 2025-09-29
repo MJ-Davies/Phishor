@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Nav from "../components/Nav.tsx";
 import Footer from "../components/Footer.tsx";
 import "../css/login.css";
@@ -10,8 +11,11 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const { setIsAuthenticated } = useAuth();
 
-  // Handle login request
+  // Purpose: Handle login request
+  // Parameters: event(React.FormEvent) - Event on form submit
+  // Returns: None
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -22,7 +26,7 @@ function LoginPage() {
     try {
       const response = await fetch("http://localhost:8000/api/login", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }, // Send to backend server as a form
         body: formData.toString(),
       });
 
@@ -30,6 +34,7 @@ function LoginPage() {
         const token = await response.text();
         localStorage.setItem("jwt", token);
         setMessage("Login successful!");
+        setIsAuthenticated(true); // Manually update authentication context
         navigate("/home");
       } else {
         const errorText = await response.text();

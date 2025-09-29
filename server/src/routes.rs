@@ -2,6 +2,9 @@ use actix_web::{web, HttpRequest, HttpResponse, Error};
 use crate::handlers::{auth, openai, phishing_detection};
 use crate::middleware::security::authenticate;
 
+// Purpose: Configure the API endpoints to correspond to various functions
+// Parameters: cfg(ServiceConfig) - A reference to the server configurations
+// Return: None
 pub fn configure_routes(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::scope("/api")
@@ -12,7 +15,9 @@ pub fn configure_routes(cfg: &mut web::ServiceConfig) {
     );
 }
 
-// Define protected route requiring authentication
+// Purpose: Define protected route requiring authentication
+// Parameters: req(HttpRequest) - HTTP request to validate JWT token
+// Returns: None
 async fn protected_route(req: HttpRequest) -> Result<HttpResponse, Error> {
     match authenticate(req).await {
         Ok(_) => Ok(HttpResponse::Ok().body("You are authenticated!")),

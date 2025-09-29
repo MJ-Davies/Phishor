@@ -11,6 +11,9 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  // Purpose: Set the background color of the nav bar to the background color of the first section (login_section)
+  // Parameters: None
+  // Returns: None
   useEffect(() => {
     const login_section_element = document.getElementById("login_section");
     if (login_section_element) {
@@ -18,12 +21,18 @@ function RegisterPage() {
     }
   }, []);
 
+  // Purpose: Reveals the password on toggle
+  // Parameters: event(React.MouseEvent) - Mouse event that triggers password reveal
+  // Returns: None
   const handlePasswordToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const password_input = document.getElementById("password") as HTMLInputElement;
     password_input.type = password_input.type === "password" ? "text" : "password";
   };
 
+  // Purpose: Handles registration including sending info to backend server and getting JWT token
+  // Parameters: event(React.FormEvent) - Submit form event
+  // Returns: None
   const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
 

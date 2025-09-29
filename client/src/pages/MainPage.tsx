@@ -12,7 +12,9 @@ function MainPage() {
     navigate("/login");
   };
 
-  // Set the background color of the nav bar to the background color of the first section (cover_section)
+  // Purpose: Set the background color of the nav bar to the background color of the first section (cover_section)
+  // Parameters: None
+  // Returns: None
   useEffect (() => {
     const cover_section_element = document.getElementById("cover_section");
     if (cover_section_element) {
@@ -20,7 +22,9 @@ function MainPage() {
     }
   }, []);
 
-  // Change the cover_section height to account for the nav bar height
+  // Purpose: Change the cover_section height to account for the nav bar height
+  // Parameters: None
+  // Returns: None
   useEffect (() => {
     const cover_section_element = document.getElementById("cover_section");
     if (cover_section_element) {

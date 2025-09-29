@@ -6,7 +6,7 @@ use crate::utils::jwt::verify_token;
 
 /** 
 Purpose: Authenticate users based on the JWT passed in
-Params: req: an HTTP request to obtain the JWT
+Params: req(HttpRequest) - an HTTP request to verify a JWT token
 Returns: req
 */
 pub async fn authenticate(req: HttpRequest) -> Result<HttpRequest, Error> {

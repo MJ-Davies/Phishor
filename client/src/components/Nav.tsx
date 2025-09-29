@@ -1,12 +1,15 @@
+/**
+ * Purpose: Represents the nav bar of webpages
+ */
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../css/index.css";
 
 function Nav({ bgColor = "var(--color-primaryBgColorLight)" }) {
   const [isSmallNav, setIsSmallNav] = useState(false);
-  const { isAuthenticated } = useAuth(); // Authentication state from context
   const [navButtonLabel, setNavButtonLabel] = useState("Login");
   const [navButtonLink, setNavButtonLink] = useState("/login");
+  const { isAuthenticated, loading } = useAuth();
 
   // Check if the page has been scrolled more than 10px
   useEffect(() => {
@@ -25,6 +28,7 @@ function Nav({ bgColor = "var(--color-primaryBgColorLight)" }) {
   }
 
   useEffect(() => {
+    if (loading) return;
     if (isAuthenticated) {
       setNavButtonLabel("Home");
       setNavButtonLink("/home");

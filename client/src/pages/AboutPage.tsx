@@ -1,3 +1,6 @@
+/**
+ * Purpose: Represent content on the About webpage
+ */
 import Nav from '../components/Nav.tsx'
 import Footer from '../components/Footer.tsx'
 import { useRef, useEffect, useState } from "react";
@@ -20,7 +23,9 @@ function AboutPage() {
         { hex: "#264621", name: "Woodland Green" },
     ];
 
-    // Set the background color of the nav bar to the background color of the first section (cover_section)
+    // Purpose: Set the background color of the nav bar to the background color of the first section (cover_section)
+    // Parameters: None
+    // Returns: None
     useEffect(() => {
         const intro_section_element = document.getElementById("intro_section");
         if (intro_section_element) {
@@ -28,10 +33,11 @@ function AboutPage() {
         }
     }, []);
 
-    // Add the branding colors to the colour grid
+    // Purpose: Add the branding colors to the colour grid
+    // Parameters: None
+    // Returns: None
     useEffect(() => {
         const color_grid_element = document.getElementById("color_grid");
-        
     
         if (color_grid_element && !hasRun.current) {
             hasRun.current = true; // Prevent effect from running twice
@@ -46,7 +52,10 @@ function AboutPage() {
             });
         }
     }, []);
-    // Function to determine contrasting text color (black or white)
+
+    // Purpose: Function to determine contrasting text color (black or white)
+    // Parameters: hex(String) - The hex value of a colour in string format
+    // Returns: String of #000000 (black) or #FFFFFF (white)
     function getContrastingColor(hex: string): string {
         const r = parseInt(hex.substring(1, 3), 16);
         const g = parseInt(hex.substring(3, 5), 16);
@@ -54,7 +63,6 @@ function AboutPage() {
         const brightness = (r * 299 + g * 587 + b * 114) / 1000;
         return brightness > 125 ? "#000000" : "#FFFFFF"; // Use black or white text for contrast
     }
-
 
     return (
         <div>
