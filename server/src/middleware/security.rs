@@ -4,11 +4,10 @@ PURPOSE: Store functions related to sanitiziation and validation (i.e. JWT valid
 use actix_web::{Error, HttpRequest, HttpResponse};
 use crate::utils::jwt::verify_token;
 
-/** 
-Purpose: Authenticate users based on the JWT passed in
-Params: req(HttpRequest) - an HTTP request to verify a JWT token
-Returns: req
-*/
+
+/// Purpose: Authenticate users based on the JWT passed in
+/// Params: req(HttpRequest) - an HTTP request to verify a JWT token
+/// Returns: req
 pub async fn authenticate(req: HttpRequest) -> Result<HttpRequest, Error> {
     if let Some(auth_header) = req.headers().get("Authorization") {
         if let Ok(token) = auth_header.to_str() {

@@ -8,9 +8,9 @@ mod handlers;
 mod middleware;
 mod utils;
 
-// Purpose: Initialize and run the backend server
-// Parameters: None
-// Returns: None
+/// Purpose: Initialize and run the backend server
+/// Parameters: None
+/// Returns: None
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     println!("Initializing the server...");

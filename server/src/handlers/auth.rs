@@ -22,11 +22,11 @@ pub struct RegisterForm {
     password: String,
 }
 
-/**
- * Purpose: Handles user registration.
- * Params: credentials(RegisterForm) - Registration credentials containing username and password
- * Returns: HTTP response with success or failure message.
- */
+
+/// Purpose: Handles user registration.
+/// Params: credentials(RegisterForm) - Registration credentials containing username and password
+/// Returns: HTTP response with success or failure message.
+
 pub async fn register(credentials: web::Form<RegisterForm>) -> impl Responder {
     let mut users = USERS.lock().unwrap();
 
@@ -45,11 +45,11 @@ pub async fn register(credentials: web::Form<RegisterForm>) -> impl Responder {
     HttpResponse::Created().body(token)
 }
 
-/** 
-Purpose: Checks that login is valid
-Params: credentials(RegisterForm) - Login credentials containing username and password
-Returns: response body
-*/
+
+/// Purpose: Checks that login is valid
+/// Params: credentials(RegisterForm) - Login credentials containing username and password
+/// Returns: response body
+
 pub async fn login(credentials: web::Form<RegisterForm>) -> impl Responder {
     let users = USERS.lock().unwrap();
     

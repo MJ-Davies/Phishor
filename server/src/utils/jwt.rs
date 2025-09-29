@@ -16,11 +16,9 @@ pub struct Claims {
     exp: usize,  // Expiration timestamp
 }
 
-/** 
-Purpose: Generates a JSON Web Token (JWT) for the user
-Params: user_id(address to string) - the User ID that is getting the JWT generated
-Returns: String
-*/
+/// Purpose: Generates a JSON Web Token (JWT) for the user
+/// Params: user_id(address to string) - the User ID that is getting the JWT generated
+/// Returns: String
 pub fn generate_token(user_id: &str) -> String {
     let expiration = Utc::now() + Duration::hours(24); // Token lasts 24 hours
     let claims = Claims { sub: user_id.to_string(), exp: expiration.timestamp() as usize };
@@ -28,11 +26,9 @@ pub fn generate_token(user_id: &str) -> String {
     encode(&Header::default(), &claims, &EncodingKey::from_secret(SECRET)).unwrap()
 }
 
-/** 
-Purpose: Verifies the JWT to ensure it is valid
-Params: token(address to string) - a JWT (valid or invalid)
-Returns: Claims
-*/
+/// Purpose: Verifies the JWT to ensure it is valid
+/// Params: token(address to string) - a JWT (valid or invalid)
+/// Returns: Claims
 pub fn verify_token(token: &str) -> Result<Claims, jsonwebtoken::errors::Error> {
     let mut validation = Validation::default();
     validation.validate_exp = true; // Enforce expiration check
