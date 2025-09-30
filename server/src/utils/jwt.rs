@@ -12,8 +12,8 @@ const SECRET: &[u8] = b"A STATIC KEY"; // Can be made dynamic in a future develo
 // Struct defining what a Claims is
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
-    sub: String, // User ID
-    exp: usize,  // Expiration timestamp
+    pub sub: String, // User ID
+    pub exp: usize,  // Expiration timestamp
 }
 
 /// Purpose: Generates a JSON Web Token (JWT) for the user

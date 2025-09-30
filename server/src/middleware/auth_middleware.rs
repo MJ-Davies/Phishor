@@ -1,0 +1,58 @@
+use actix_service::{Service, Transform};
+use actix_web::{dev::{ServiceRequest, ServiceResponse}, Error, HttpMessage};
+use futures::future::{ok, Ready, LocalBoxFuture};
+use std::rc::Rc;
+use crate::middleware::security::authenticate;
+
+pub struct AuthMiddleware;
+
+// Tell Actix how to wrap authenticate with MiddleWare
+impl<S, B> Transform<S, ServiceRequest> for AuthMiddleware
+where
+    S: Service<ServiceRequest, Response = ServiceResponse<B>, Error = Error> + 'static,
+    B: 'static,
+{
+    type Response = ServiceResponse<B>;
+    type Error = Error;
+    type Transform = AuthMiddlewareService<S>;
+    type InitError = ();
+    type Future = Ready<Result<Self::Transform, Self::InitError>>;
+
+    fn new_transform(&self, service: S) -> Self::Future {
+        ok(AuthMiddlewareService {
+            service: Rc::new(service),
+        })
+    }
+}
+
+pub struct AuthMiddlewareService<S> {
+    service: Rc<S>,
+}
+
+impl<S, B> Service<ServiceRequest> for AuthMiddlewareService<S>
+where
+    S: Service<ServiceRequest, Response = ServiceResponse<B>, Error = Error> + 'static,
+    B: 'static,
+{
+    type Response = ServiceResponse<B>;
+    type Error = Error;
+    type Future = LocalBoxFuture<'static, Result<Self::Response, Self::Error>>;
+
+    fn poll_ready(
+        &self,
+        ctx: &mut std::task::Context<'_>,
+    ) -> std::task::Poll<Result<(), Self::Error>> {
+        self.service.poll_ready(ctx)
+    }
+
+    fn call(&self, req: ServiceRequest) -> Self::Future {
+        let service = self.service.clone();
+
+        Box::pin(async move {
+            match authenticate(req.request()).await {
+                Ok(_) => service.call(req).await,
+                Err(e) => Err(e),
+            }
+        })
+    }
+}
