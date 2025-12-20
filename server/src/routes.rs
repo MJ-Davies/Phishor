@@ -1,6 +1,5 @@
-use actix_web::{web, HttpRequest, HttpResponse, Error};
-use crate::handlers::{auth, openai, phishing_detection};
-use crate::middleware::security::authenticate;
+use actix_web::{web, HttpResponse};
+use crate::handlers::{auth, openai};
 use crate::middleware::auth_middleware::AuthMiddleware;
 
 /// Purpose: Configure the API endpoints to correspond to various functions

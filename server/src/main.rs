@@ -1,5 +1,6 @@
 use actix_web::{web, get, HttpServer, App, Responder, HttpResponse};
 use actix_cors::Cors;
+use actix_web::http::header;
 use routes::configure_routes;
 
 mod routes;
@@ -19,9 +20,10 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(
                 Cors::default()
-                    .allow_any_origin()
-                    .allow_any_method()
-                    .allow_any_header(),
+                    .allowed_origin("http://localhost:5173")
+                    .allowed_methods(vec!["GET", "POST"])
+                    .allowed_headers(vec![header::AUTHORIZATION, header::CONTENT_TYPE])
+                    .max_age(3600),
             )
             .configure(configure_routes) // Attach route configurations
     })
