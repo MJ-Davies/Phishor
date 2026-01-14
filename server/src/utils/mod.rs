@@ -4,5 +4,5 @@ UTILS: Reusable logic that don't handle requests, contains:
        - Shared logic
        - Services
 */
-pub mod encryption;
 pub mod jwt;
+pub mod rate_limiter;

@@ -1,5 +1,8 @@
+/* 
+PURPOSE: Wrapper for authenticating users
+*/
 use actix_service::{Service, Transform};
-use actix_web::{dev::{ServiceRequest, ServiceResponse}, Error, HttpMessage};
+use actix_web::{dev::{ServiceRequest, ServiceResponse}, Error};
 use futures::future::{ok, Ready, LocalBoxFuture};
 use std::rc::Rc;
 use crate::middleware::security::authenticate;

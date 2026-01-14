@@ -1,10 +1,9 @@
-use actix_web::{web, get, HttpServer, App, Responder, HttpResponse};
+use actix_web::{HttpServer, App};
 use actix_cors::Cors;
 use actix_web::http::header;
 use routes::configure_routes;
 
 mod routes;
-mod db;
 mod handlers;
 mod middleware;
 mod utils;
@@ -17,6 +16,7 @@ async fn main() -> std::io::Result<()> {
     println!("Initializing the server...");
 
     let server = HttpServer::new(|| {
+
         App::new()
             .wrap(
                 Cors::default()
@@ -27,8 +27,9 @@ async fn main() -> std::io::Result<()> {
             )
             .configure(configure_routes) // Attach route configurations
     })
+    .workers(1) // Forces single thread, used to test rate limiting
     .bind(("127.0.0.1", 8000))?;
     println!("Server is running on port 8000");
-    server.run().await;
+    server.run().await?;
     Ok(())
 }

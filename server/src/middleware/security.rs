@@ -1,7 +1,7 @@
 /* 
 PURPOSE: Store functions related to sanitiziation and validation (i.e. JWT validation)
 */
-use actix_web::{Error, HttpRequest, HttpResponse, HttpMessage};
+use actix_web::{Error, HttpRequest, HttpMessage};
 use crate::utils::jwt::verify_token;
 
 
