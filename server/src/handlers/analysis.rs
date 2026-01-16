@@ -27,7 +27,7 @@ pub async fn analyze_phishing(req_body: web::Json<AnalysisRequest>) -> impl Resp
         .map(|item| format!("{}: {}", item.user, item.message))
         .collect::<Vec<String>>()
         .join("\n");
-    println!("Conversation History from user: {}", conversation_str);
+    println!("Conversation history from user: {}", conversation_str);
 
     // Call the Gemini Utility
     match analyze_conversation(conversation_str).await {

@@ -61,7 +61,7 @@ pub async fn analyze_conversation(messages: String) -> Result<String, String> {
         .as_str()
         .unwrap_or("No analysis returned")
         .to_string();
-
+    
     Ok(analysis)
 
     // DUMMY RESPONSE so that Gemini API doesn't get rate limited when I need to test it later
