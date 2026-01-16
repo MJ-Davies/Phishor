@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Nav from "../components/Nav.tsx";
 import Footer from "../components/Footer.tsx";
 import "../css/login.css";
+import { API_BASE_URL } from "../config";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function LoginPage() {
     formData.append("password", password);
 
     try {
-      const response = await fetch("http://localhost:8000/api/login", {
+      const response = await fetch(`${API_BASE_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" }, // Send to backend server as a form
         body: formData.toString(),

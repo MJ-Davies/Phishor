@@ -10,7 +10,7 @@ use std::collections::HashMap; // Temporary in-memory storage for example
 use lazy_static::lazy_static; // Temporary in-memory storage for example
 use std::sync::Mutex; // Temporary in-memory storage for example
 
-// Temporary storage (replace with a real database)
+// In a real scenario, we would use a SQL database with encrypted passwords
 lazy_static! {
     static ref USERS: Mutex<HashMap<String, String>> = Mutex::new(HashMap::new());
 }

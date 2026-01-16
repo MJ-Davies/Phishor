@@ -3,6 +3,7 @@ import Footer from '../components/Footer.tsx';
 import { useEffect, useState } from "react";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ function RegisterPage() {
 
     try {
       // Send the form data
-      const response = await fetch("http://localhost:8000/api/register", {
+      const response = await fetch(`${API_BASE_URL}/api/register`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formData.toString(),

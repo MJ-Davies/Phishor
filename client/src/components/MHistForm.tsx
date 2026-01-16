@@ -2,6 +2,7 @@
  * Purpose: Represents the message history form that users put for it to be analyzed by AI in the backend
  */
 import React, { useState } from "react";
+import { API_BASE_URL } from "../config";
 
 // An enumerator that defines the parties involved in this message history form
 const enum User {
@@ -81,11 +82,10 @@ const MHistForm = ({ onFeedbackReceived }: MHistFormProps) => {
     
     try {
         setStatus("Processing message history...");
-        const response = await fetch("http://localhost:8000/api/analyze", {
+        const response = await fetch(`${API_BASE_URL}/api/analyze`, {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",
-                // Don't forget your JWT if you enabled AuthMiddleware!
                 "Authorization": `Bearer ${localStorage.getItem("jwt")}`
             },
             body: JSON.stringify({ history: items }),

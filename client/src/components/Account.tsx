@@ -13,6 +13,8 @@
  *        - Before secured actions
  *        - When refreshing UI state
  */
+import { API_BASE_URL } from "../config";
+
 export async function fetchProtectedData(): Promise<any> {
     const token = localStorage.getItem("jwt");
 
@@ -22,7 +24,7 @@ export async function fetchProtectedData(): Promise<any> {
     }
 
     try {
-        const response = await fetch("http://localhost:8000/api/protected-route", {
+        const response = await fetch(`${API_BASE_URL}/api/protected-route`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`

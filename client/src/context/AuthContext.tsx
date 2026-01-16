@@ -3,6 +3,7 @@
  */
 import { createContext, useContext, useState, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
+import { API_BASE_URL } from "../config";
 
 // Define context type
 interface AuthContextType {
@@ -65,7 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
       
       // Verifies that token is valid with the backend
-      const response = await fetch("http://localhost:8000/api/protected", {
+      const response = await fetch(`${API_BASE_URL}/api/protected`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

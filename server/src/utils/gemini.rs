@@ -14,6 +14,7 @@ use std::env;
 // Parameters: messages (String) - user inputted messages of a conversation
 // Returns: Result<String, String>
 pub async fn analyze_conversation(messages: String) -> Result<String, String> {
+    // Get Gemini API key from .env
     let api_key = env::var("GEMINI_API_KEY").map_err(|_| "GEMINI_API_KEY not set")?;
     let url = format!(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={}",
