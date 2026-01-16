@@ -6,3 +6,4 @@ UTILS: Reusable logic that don't handle requests, contains:
 */
 pub mod jwt;
 pub mod rate_limiter;
+pub mod gemini;

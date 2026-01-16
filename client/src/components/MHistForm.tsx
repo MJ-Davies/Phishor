@@ -9,7 +9,12 @@ const enum User {
   Them = "Them"
 }
 
-const MHistForm = () => {
+// Prop Interface so that feedback can be passed to HomePage
+interface MHistFormProps {
+    onFeedbackReceived: (feedback: string) => void;
+}
+
+const MHistForm = ({ onFeedbackReceived }: MHistFormProps) => {
   // Default content for the user to see
   const [items, setItems] = useState([
     { user: User.Me, message: "Hello!" },
@@ -17,6 +22,7 @@ const MHistForm = () => {
     { user: User.Me, message: "How are you?" },
     { user: User.Them, message: "I'm good, thanks!" }
   ]);
+  const [status, setStatus] = useState(""); // Can be "", "Sending...", "Success!", or "Error"
 
   // Purpose: Handles start of the drag event for the message history form
   // Parameters: e(React.DragEvent) - The event to handle (drag)
@@ -70,10 +76,36 @@ const MHistForm = () => {
   // Purpose: Function to send to backend server when code finishes
   // Parameters: e(React.FormEvent)
   // Returns: None
-  const sendToBackend = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendToBackend = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO implement Sending the items array to the backend server
-    console.log("Sending to backend!")
+    
+    try {
+        setStatus("Processing message history...");
+        const response = await fetch("http://localhost:8000/api/analyze", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                // Don't forget your JWT if you enabled AuthMiddleware!
+                "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            },
+            body: JSON.stringify({ history: items }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setStatus("Message history processed successfully! See feedback below.");
+            // This sends feedback back to to HomePage
+            onFeedbackReceived(data.feedback); 
+        } else {
+            console.error("Failed to analyze");
+            setStatus("Error: Failed to process data. See message below for more details.");
+            onFeedbackReceived("Error: The server could not analyze the messages. Please try again later.");
+        }
+    } catch (err) {
+        console.error(err);
+        setStatus("Error: Network connection failed.");
+        onFeedbackReceived("Error: Could not connect to the server.");
+    }
   }
 
   return (
@@ -107,6 +139,15 @@ const MHistForm = () => {
         <button type="button" onClick={handleAddEntry}>Add entry</button>
         <button type="submit">Submit Message History to AI</button>
       </div>
+      {status && (
+        <p style={{ 
+            marginTop: "10px", 
+            color: status.startsWith("Error") ? "red" : "darkgreen",
+            fontWeight: "bold"
+        }}>
+            {status}
+        </p>
+      )}
     </form>
   );
 };

@@ -1,5 +1,5 @@
 /* 
-PURPOSE: Store functions related to JWT authentication
+PURPOSE: Store functions related to JWT authentication, entry point for authentication
 NOTES: JWT tokens here are meant to authenticate users after they have logged in
        Ensures that the user can quickly log in, without reentering credentials, after 24 hours
 */

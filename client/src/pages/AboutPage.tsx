@@ -5,7 +5,6 @@ import Nav from '../components/Nav.tsx'
 import Footer from '../components/Footer.tsx'
 import { useRef, useEffect, useState } from "react";
 import "../css/about.css";
-import { useNavigate } from "react-router-dom";
 
 function AboutPage() {
     const [navBgColor, setNavBgColor] = useState("var(--color-primaryBgColorLight)");

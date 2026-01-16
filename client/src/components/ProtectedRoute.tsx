@@ -5,7 +5,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-// Purpose: For any webpage with Protectedroute element, redirect to login if authentication not valid
+// Purpose: For any webpage with ProtectedRoute element, redirect to login if authentication not valid
 // Parameters: children(React.ReactNode)
 // Returns: React Element
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {

@@ -1,5 +1,5 @@
 use actix_web::{web, HttpResponse};
-use crate::handlers::{auth, openai};
+use crate::handlers::{auth, analysis};
 
 // Import middleware wrappers
 use crate::middleware::auth_middleware::AuthMiddleware;
@@ -15,11 +15,13 @@ pub fn configure_routes(cfg: &mut web::ServiceConfig) {
             .wrap(RateLimitMiddleware::new())
             .route("/login", web::post().to(auth::login))
             .route("/register", web::post().to(auth::register))
+            .route("/analyze", web::post().to(analysis::analyze_phishing))
             .route("/health", web::get().to(|| async { HttpResponse::Ok().body("Server is healthy") }))
             // We ensure that we are always authenticated in the backend
             .service(
                 web::scope("/protected")
                     .wrap(AuthMiddleware)
+                    .route("/analyze", web::post().to(analysis::analyze_phishing)) // Analyze must always be authenticated before using
                     .route("", web::get().to(|| async {
                         HttpResponse::Ok().body("You are authenticated!")
                     }))

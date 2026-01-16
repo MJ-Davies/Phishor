@@ -13,6 +13,11 @@ mod utils;
 /// Returns: None
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
+    println!("Loading .env file...");
+    // Load .env file
+    dotenv::dotenv().ok();
+    println!(".env file successfully loaded");
+
     println!("Initializing the server...");
 
     let server = HttpServer::new(|| {

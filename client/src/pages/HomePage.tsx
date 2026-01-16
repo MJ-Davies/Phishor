@@ -1,3 +1,6 @@
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
 import Nav from '../components/Nav.tsx'
 import Footer from '../components/Footer.tsx'
 import MHistForm from '../components/MHistForm.tsx'
@@ -6,7 +9,7 @@ import "../css/home.css";
 
 function HomePage() {
     const [navBgColor, setNavBgColor] = useState("var(--color-primaryBgColorLight)");
-    const [feedback, setFeedback] = useState([]);
+    const [feedback, setFeedback] = useState<string>("");
 
     // Purpose: Set the background color of the nav bar to the background color of the first section (cover_section)
     // Parameters: None
@@ -33,21 +36,25 @@ function HomePage() {
             <section id="mhist_section" className="dark_section">
                 <div className="mhist_form">
                     <h1>Message History</h1>
-                    <MHistForm />
+                    <MHistForm onFeedbackReceived={setFeedback} />
                 </div>
             </section>
             {/* Feedback section */}
             <section id="feedback_section" className="light_section">
                 <div>
                     <h1>Feedback</h1>
-                    {feedback.length === 0 ? (
-                        <p>
-                        No feedback available yet.
-                        </p>
+                    {feedback === "" ? (
+                        <div className="markdown-container">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                {"No feedback available yet."}
+                            </ReactMarkdown>
+                        </div>
                     ) : (
-                        <p>
-                        {feedback}
-                        </p>
+                        <div className="markdown-container">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                {feedback}
+                            </ReactMarkdown>
+                        </div>
                     )}
                 </div>
             </section>
